@@ -1,0 +1,5 @@
+This is regarding a new script added to the template "Nepa Responsive Layout V2 Template - Quality Score (p770353783294)".
+Just like we have a "GridMask(...)" function for a Single grid question, I have made a function for Multi Grid Question called GridMaskMulti(...) which returns the precodes of rows which have punch on specified columns.
+In this function we have to pass an additional parameter that is a set of precodes of rows(questions) from the Multi Grid question.
+Example : GridMaskMulti('Q20',nnset(1,5),3,5); OR GridMaskMulti('Q20',nset(6),3,5);
+It is added in the Template mentioned above, please check and try it out and let me know if any feedback or suggestions. 
