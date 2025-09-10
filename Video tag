@@ -1,0 +1,14 @@
+<iframe src="https://player.vimeo.com/video/712852908?h=22ed7648fb&autoplay=1&disablekb=1&loop=0&player_id=player1" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="autoplay"></iframe>
+
+<style>
+@media only screen and (min-width: 768px) {
+iframe{
+ height: 360px;
+} 
+}
+@media only screen and (max-width: 767px) {
+iframe{
+ height: auto;
+}
+}
+</style>
