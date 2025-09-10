@@ -1,0 +1,9 @@
+var re = /^\d{n}$/;  //Replace 'n' with the number of digits required in the postal code
+var num = f(qid)[1].get(); //replace 'qid'
+
+var msg="";
+if(!re.test(num))
+{
+    RaiseError();
+    SetQuestionErrorMessage(CurrentLang(),"Please provide valid postal code");
+}
