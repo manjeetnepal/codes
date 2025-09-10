@@ -1,0 +1,27 @@
+function copySAGrid(qid,qidVar)
+{
+	ClearForm(f(qid));
+
+	var i, j;
+	var qidTo = qid;
+	var qidFrom;
+	var arr = qidVar;
+	var s;
+	var rows;
+
+	for(i=0; i<arr.length; i++)
+	{
+		qidFrom = qid +""+ arr[i];
+		rows = f(qidFrom).domainValues();
+		
+		for(j=0; j<rows.length; j++)
+		{
+			if(f(qidFrom)[rows[j]].toBoolean())
+			{
+				s = f(qidFrom)[rows[j]].get();
+				f(qidTo)[rows[j]].set(s);
+			}
+		}
+	}
+
+}
