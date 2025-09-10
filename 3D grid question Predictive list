@@ -1,0 +1,63 @@
+<link rel="stylesheet" href=https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css>
+<script src=https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+<script src=https://code.jquery.com/ui/1.12.1/jquery-ui.js></script>
+<script>
+$(document).ready(function(){
+                var answer = "";
+                //var arr = ['01', '02', '03', '04', '05', '06', '07', '08', '901', '902', '903', '904', '0998', '1001', '1002', '1003', '1004', '1005', '1006', '1007', '1098', '27', '28', '11', '12', '13', '14', '15', '16', '17', '1801', '1802', '1803', '1804', '1805', '1806', '1807', '1808', '1809', '1998', '19', '20', '21', '22', '23', '24', '25', '26'] // Row codes -Need to change
+                var i;
+                var precode;
+				var qid;
+                var cnt = 0;
+                var str = "^f('HQPredictiveList').domainLabels()^"; // Brand list -Need to change
+                var availableTags = str.split(',');
+				var len = 2;
+$(".cf-text-box").keypress(function(){
+	var id = $(this).prop("id");	// Get id of open text box. Eg: desktop_Purch_brand_purchased_OE1_01
+	
+	var code = id.split("_");		// Split the id with underscore
+	
+	i = code[code.length-1];		// The last value in the split array corresponds to the precode. Eg: 01
+	
+	
+                                if( parseInt(Confirmit.page.surveyInfo.mobileThreshold) >= $( window ).width() ) // Mobile
+                                {
+                                                qid = "mobile_Purch_brand_purchased_OE1"; // Need to change column QID
+                                                precode = "#"+qid+"_"+i+"_input"; // #mobile_Purch_brand_purchased_OE1_1_input
+                                }
+                                else
+                                {
+                                                qid = "desktop_Purch_brand_purchased_OE1"; // Need to change column QID
+                                                precode = "#"+qid+"_"+i; // #desktop_Purch_brand_purchased_OE1_1
+                                }
+                                cnt = 0;
+								
+                $( precode ).autocomplete({
+source: function (request, response) {
+var matches = $.map(availableTags, function (acItem) {
+var inputString = $.trim(request.term.toUpperCase());
+len = inputString.length;
+//if (acItem.toUpperCase().indexOf(inputString) === 0)
+if (acItem.toUpperCase().indexOf(inputString) > -1 && acItem.toUpperCase().indexOf(inputString) < 1)
+{
+	return acItem;
+}
+});
+//response(matches);    
+response(matches.length > 0?matches:"");
+},
+	  minLength: len,
+	  autoFocus: true,
+	  select: function(e, ui){
+		answer = ui.item.label;
+		cnt++;
+	
+		if( cnt > 0 )
+		{
+			Confirmit.page.getQuestion("Purch_brand_purchased_OE").innerQuestions[0].setValue(i, answer);
+		}
+	  }
+    });
+});
+});
+</script>
