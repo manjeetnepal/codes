@@ -1,0 +1,22 @@
+function copyMultiGrids(qid,rowSet,qidVar)
+{
+
+	var qidTo;
+	var qidFrom;
+	var rows = rowSet.members();
+	var i,j;
+	var arr = qidVar;
+
+	for(j=0; j<arr.length; j++)
+	{
+	    for(i=0; i<rows.length; i++)
+	    {
+		  qidFrom = qid+arr[j]+"_"+rows[i];
+	      qidTo = qid+"_"+rows[i];
+			if(f(qidFrom).toBoolean())
+            {
+                f(qidTo).set(f(qidFrom));
+            }
+	     }
+	}
+}
