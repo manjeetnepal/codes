@@ -1,0 +1,51 @@
+function MinOneAnswerPerRowWithNone(qid,colSet,setEx)
+{
+	
+	var col = colSet.members();
+	var row = f(qid+col[0]).domainValues();
+	var i, j, k;
+	var qidCol;
+	var cnt;
+	var cntEx;
+	var exlusive = setEx.members();
+
+
+	for(i=0; i<row.length; i++)
+	{
+		cnt = 0;
+		cntEx = 0;
+
+		for(j=0; j<col.length; j++) //Non-Exclusive
+		{
+			qidCol = qid+col[j];
+
+			if(f(qidCol).isect(set(row[i])).size()>0)
+			{
+				cnt = cnt + 1;
+			}
+		}
+
+		for(k=0; k<exlusive.length; k++)	//Exclusive
+		{
+			qidCol = qid+exlusive[k];
+
+			if(f(qidCol).isect(set(row[i])).size()>0)
+			{
+				cntEx = cntEx + 1;
+			}
+		}
+
+		if((cnt>0 && cntEx>0) || cntEx>1)	// Exlcusive
+		{
+			RaiseError();
+			AppendErrorMessage(CurrentLang(), "'None of these / Don't Know' are exclusive option. Do not select it with any other column options");
+		}
+		
+		if(cnt==0 && cntEx==0)	//Nothing selected
+		{
+			RaiseError();
+			AppendErrorMessage(CurrentLang(), "Please select atleast one option per row");
+		}
+	}
+
+}
